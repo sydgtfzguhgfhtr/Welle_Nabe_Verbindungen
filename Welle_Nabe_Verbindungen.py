@@ -42,4 +42,22 @@ Keilwelle_leicht_Liste = []
 for i in range(15):
     Keilwelle_leicht_Liste.append(Keilwelle_leicht(Kl_n[i], Kl_d[i], Kl_D[i], Kl_b[i], Kl_phi[i]))
 
-    
+# DIN ISO 14
+class Keilwelle_mittel():
+    def __init__(self, n, d, D, b, phi):
+        self.n = n
+        self.d = d
+        self.D = D
+        self.b = b
+        self.phi = phi
+
+Km_n = [6,6,6,6,6,6,6,6,8,8,8,8,8,8,8,10,10,10,10,10]
+Km_d = [11,13,16,18,21,23,26,28,32,36,42,46,52,56,62,72,82,92,102,112]
+Km_D = [14,16,20,22,25,28,32,34,38,42,48,54,60,65,72,82,92,102,112,125]
+Km_b = [3,3.5,4,5,5,6,6,7,6,7,8,9,10,10,12,12,12,14,16,18]
+Km_phi = [0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9]
+
+Keilwelle_mittel_Liste = []
+
+for i in range(20):
+    Keilwelle_mittel_Liste.append(Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]))
