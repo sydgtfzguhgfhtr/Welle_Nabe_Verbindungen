@@ -50,6 +50,8 @@ class Keilwelle_mittel():
         self.D = D
         self.b = b
         self.phi = phi
+        self.dm = (self.D + self.d) / 2
+        self.h = (self.D - self.d) / 2
 
 Km_n = [6,6,6,6,6,6,6,6,8,8,8,8,8,8,8,10,10,10,10,10]
 Km_d = [11,13,16,18,21,23,26,28,32,36,42,46,52,56,62,72,82,92,102,112]
@@ -61,3 +63,25 @@ Keilwelle_mittel_Liste = []
 
 for i in range(20):
     Keilwelle_mittel_Liste.append(Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]))
+
+# DIN 5464
+class Keilwelle_schwer():
+    def __init__(self, n, d, D, b, phi):
+        self.n = n
+        self.d = d
+        self.D = D
+        self.b = b
+        self.phi = phi
+        self.dm = (self.D + self.d) / 2
+        self.h = (self.D - self.d) / 2
+
+Ks_n = [10,10,10,10,10,10,10,10,10,10,16,16,16,16,20,20,20,20]
+Ks_d = [16,18,21,23,26,28,32,36,42,46,52,56,62,72,82,92,102,112]
+Ks_D = [20,23,26,29,32,35,40,45,52,56,60,65,72,82,92,102,115,125]
+Ks_b = [2.5,3,3,4,4,4,5,5,6,7,5,5,6,7,6,7,8,9]
+Ks_phi = [0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9]
+
+Keilwelle_schwer_Liste = []
+
+for i in range(18):
+    Keilwelle_schwer_Liste.append(Keilwelle_schwer(Ks_n[i], Ks_d[i], Ks_D[i], Ks_b[i], Ks_phi[i]))
