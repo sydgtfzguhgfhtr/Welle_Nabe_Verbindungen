@@ -103,3 +103,4 @@ Ue_40_von_V = [410, 520, 550, 580, 630, 640, 700, 670, 750, 600, 600, 650, 700, 
 Ue_40_bis_V = [410, 520, 700, 580, 780, 640, 850, 670, 900, 600, 750, 800, 850, 900, 850, 850, 950, 950, 950, 950, 1100, 1100, 1100, 1100, 1230, 1200, 1300, 1300, 900, 950, 1000, 1200]
 
 Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
+Verguetungsstaehle = [Verguetungsstahl(Namen_Verguetungsstahl[i], U_40_von_V[i], U_40_bis_V[i], Ue_40_von_V[i], Ue_40_bis_V[i]) for i in range(len(Namen_Verguetungsstahl))]
