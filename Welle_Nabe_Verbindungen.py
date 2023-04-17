@@ -72,3 +72,21 @@ Passfeder_Liste = [Passfeder(P_dw_von[i], P_dw_bis[i], P_b[i], P_h[i], P_t1[i], 
 Keilwelle_leicht_Liste = [Keilwelle_leicht(Kl_n[i], Kl_d[i], Kl_D[i], Kl_b[i], Kl_phi[i]) for i in range(len(Kl_n))]
 Keilwelle_mittel_Liste = [Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]) for i in range(len(Km_n))]
 Keilwelle_schwer_Liste = [Keilwelle_schwer(Ks_n[i], Ks_d[i], Ks_D[i], Ks_b[i], Ks_phi[i]) for i in range(len(Ks_n))]
+
+# Werkstoffe
+class Baustahl():
+    def __init__(self, Bezeichnung: str, Re_u_16: int, Re_u_40: int, Re_u_63: int, Re_u_80: int):
+        self.Bezeichunung = Bezeichnung
+        self.Re_u_16 = Re_u_16
+        self.Re_u_40 = Re_u_40
+        self.Re_u_63 = Re_u_63
+        self.Re_u_80 = Re_u_80
+        
+Namen_Baustahl = ["S185", "S235", "S275", "S355", "S450"]
+U_16_Baustahl = [185, 235, 275, 355, 450]
+U_40_Baustahl = [175, 225, 265, 345, 430]
+U_63_Baustahl = [175, 215, 255, 335, 410]
+U_80_Baustahl = [175, 215, 245, 325, 390]
+
+Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
+
