@@ -81,6 +81,14 @@ class Baustahl():
         self.Re_u_40 = Re_u_40
         self.Re_u_63 = Re_u_63
         self.Re_u_80 = Re_u_80
+
+class Verguetungsstahl():
+    def __init__(self, Bezeichnung: str, Re_u_40_von: int, Re_u_40_bis: int, Re_ue_40_von: int, Re_ue_40_bis: int):
+        self.Bezeichnung = Bezeichnung
+        self.Re_u_40_von = Re_u_40_von
+        self.Re_u_40_bis = Re_u_40_bis
+        self.Re_ue_40_von = Re_ue_40_von
+        self.Re_ue_40_bis = Re_ue_40_bis
         
 Namen_Baustahl = ["S185", "S235", "S275", "S355", "S450"]
 U_16_Baustahl = [185, 235, 275, 355, 450]
@@ -88,5 +96,10 @@ U_40_Baustahl = [175, 225, 265, 345, 430]
 U_63_Baustahl = [175, 215, 255, 335, 410]
 U_80_Baustahl = [175, 215, 245, 325, 390]
 
-Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
+Namen_Verguetungsstahl = ["C22E", "C35", "C35E", "C45", "C45E", "C55", "C55E", "C60", "C60E", "28Mn6", "38Cr2", "46Cr2", "34Cr4", "37Cr4", "25CrMo4", "25CrMoS4", "41Cr4", "41CrS4", "34CrMo4", "34CrMoS4", "42CrMo4", "42CrMoS4", "50CrMo4", "51CrV4", "30NiCrMo16-6", "34CrNiMo6", "36NiCrMo16", "30CrNiMo8", "20MnB5", "30MnB5", "27MnCrB5-2", "39MnCrB6-2"]
+U_40_von_V = [410, 520, 600, 580, 650, 640, 750, 670, 800, 600, 700, 800, 800, 850, 800, 800, 900, 900, 900, 900, 1000, 1000, 1000, 1000, 1080, 1100, 1250, 1250, 750, 800, 900, 1050]
+U_40_bis_V = [410, 520, 750, 580, 800, 640, 900, 670, 950, 600, 850, 950, 950, 1000, 950, 950, 1100, 1100, 1100, 1100, 1200, 1200, 1200, 1200, 1230, 1300, 1450, 1450, 900, 950, 1150, 1250]
+Ue_40_von_V = [410, 520, 550, 580, 630, 640, 700, 670, 750, 600, 600, 650, 700, 750, 700, 700, 800, 800, 800, 800, 900, 900, 900, 900, 1080, 1000, 1100, 1100, 750, 800, 800, 1000]
+Ue_40_bis_V = [410, 520, 700, 580, 780, 640, 850, 670, 900, 600, 750, 800, 850, 900, 850, 850, 950, 950, 950, 950, 1100, 1100, 1100, 1100, 1230, 1200, 1300, 1300, 900, 950, 1000, 1200]
 
+Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
