@@ -1,6 +1,6 @@
 # DIN 6885
 class Passfeder():
-    def __init__(self, dw_von, dw_bis, b, h, t1, t2):
+    def __init__(self, dw_von: int, dw_bis: int, b: int, h: int, t1: float, t2: float):
         self.dw_von = dw_von
         self.dw_bis = dw_bis
         self.b = b
@@ -10,7 +10,7 @@ class Passfeder():
 
 # DIN ISO 14
 class Keilwelle_leicht():
-    def __init__(self, n, d, D, b, phi):
+    def __init__(self, n: int, d: int, D: int, b: int, phi: float):
         self.n = n
         self.d = d
         self.D = D
@@ -21,7 +21,7 @@ class Keilwelle_leicht():
 
 # DIN ISO 14
 class Keilwelle_mittel():
-    def __init__(self, n, d, D, b, phi):
+    def __init__(self, n: int, d: int, D: int, b: int, phi: float):
         self.n = n
         self.d = d
         self.D = D
@@ -32,7 +32,7 @@ class Keilwelle_mittel():
 
 # DIN 5464
 class Keilwelle_schwer():
-    def __init__(self, n, d, D, b, phi):
+    def __init__(self, n: int, d: int, D: int, b: int, phi: float):
         self.n = n
         self.d = d
         self.D = D
@@ -67,21 +67,8 @@ Ks_D = [20,23,26,29,32,35,40,45,52,56,60,65,72,82,92,102,115,125]
 Ks_b = [2.5,3,3,4,4,4,5,5,6,7,5,5,6,7,6,7,8,9]
 Ks_phi = [0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9]
 
-
-Passfeder_Liste = []
-Keilwelle_leicht_Liste = []
-Keilwelle_mittel_Liste = []
-Keilwelle_schwer_Liste = []
-
 # Listen mit Objekten erstellen
-for i in range(17):
-    Passfeder_Liste.append(Passfeder(P_dw_von[i], P_dw_bis[i], P_b[i], P_h[i], P_t1[i], P_t2[i]))
-
-for i in range(15):
-    Keilwelle_leicht_Liste.append(Keilwelle_leicht(Kl_n[i], Kl_d[i], Kl_D[i], Kl_b[i], Kl_phi[i]))
-
-for i in range(20):
-    Keilwelle_mittel_Liste.append(Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]))
-
-for i in range(18):
-    Keilwelle_schwer_Liste.append(Keilwelle_schwer(Ks_n[i], Ks_d[i], Ks_D[i], Ks_b[i], Ks_phi[i]))
+Passfeder_Liste = [Passfeder(P_dw_von[i], P_dw_bis[i], P_b[i], P_h[i], P_t1[i], P_t2[i]) for i in range(len(P_b))]
+Keilwelle_leicht_Liste = [Keilwelle_leicht(Kl_n[i], Kl_d[i], Kl_D[i], Kl_b[i], Kl_phi[i]) for i in range(len(Kl_n))]
+Keilwelle_mittel_Liste = [Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]) for i in range(len(Km_n))]
+Keilwelle_schwer_Liste = [Keilwelle_schwer(Ks_n[i], Ks_d[i], Ks_D[i], Ks_b[i], Ks_phi[i]) for i in range(len(Ks_n))]
