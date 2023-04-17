@@ -89,7 +89,14 @@ class Verguetungsstahl():
         self.Re_u_40_bis = Re_u_40_bis
         self.Re_ue_40_von = Re_ue_40_von
         self.Re_ue_40_bis = Re_ue_40_bis
-        
+
+class Einsatzstahl():
+    def __init__(self, Bezeichnung: str, Rm_von: int, Rm_bis: int):
+        self.Bezeichnung = Bezeichnung
+        self.Rm_von = Rm_von
+        self.Rm_bis = Rm_bis
+
+
 Namen_Baustahl = ["S185", "S235", "S275", "S355", "S450"]
 U_16_Baustahl = [185, 235, 275, 355, 450]
 U_40_Baustahl = [175, 225, 265, 345, 430]
@@ -102,5 +109,11 @@ U_40_bis_V = [410, 520, 750, 580, 800, 640, 900, 670, 950, 600, 850, 950, 950, 1
 Ue_40_von_V = [410, 520, 550, 580, 630, 640, 700, 670, 750, 600, 600, 650, 700, 750, 700, 700, 800, 800, 800, 800, 900, 900, 900, 900, 1080, 1000, 1100, 1100, 750, 800, 800, 1000]
 Ue_40_bis_V = [410, 520, 700, 580, 780, 640, 850, 670, 900, 600, 750, 800, 850, 900, 850, 850, 950, 950, 950, 950, 1100, 1100, 1100, 1100, 1230, 1200, 1300, 1300, 900, 950, 1000, 1200]
 
+Namen_Einsatzstahl = ["C10E", "C10R", "C15E", "C15R", "17Cr3", "17CrS3", "16MnCr5", "16MnCrS5", "16MnCrB5", "16NiCr4", "16NiCrS4", "18CrMo4", "18CrMoS4", "20MoCr3", "20MoCrS3", "20MoCr4", "20MoCrS4", "17CrNi6-6", "22CrMoS3-3", "15NiCr13", "10NiCr5-4", "20NiCrMo2-2", "20NiCrMoS2-2", "17NiCrMo6-4", "17NiCrMoS6-4", "20NiCrMoS6-4", "20MnCr5", "20MnCrS5", "18NiCr5-4", "14NiCrMo13-4", "20NiCrMo13-4", "18CrNiMo7-6"]
+Rm_von_E = [490, 490, 590, 590, 700, 700, 780, 780, 900, 980, 980, 930, 930, 780, 780, 780, 780, 1100, 1000, 920, 900, 800, 800, 1000, 1000, 1100, 980, 980, 1100, 1030, 1400, 1100]
+Rm_bis_E = [640, 640, 780, 780, 900, 900, 1080, 1080, 900, 1270, 1270, 1300, 1300, 1080, 1080, 1080, 1080, 1100, 1000, 1230, 900, 800, 800, 1000, 1000, 1100, 1270, 1270, 1100, 1080, 1400, 1100]
+
+
 Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
 Verguetungsstaehle = [Verguetungsstahl(Namen_Verguetungsstahl[i], U_40_von_V[i], U_40_bis_V[i], Ue_40_von_V[i], Ue_40_bis_V[i]) for i in range(len(Namen_Verguetungsstahl))]
+Einsatzstaehle = [Einsatzstahl(Namen_Einsatzstahl[i], Rm_von_E[i], Rm_bis_E[i]) for i in range(len(Namen_Einsatzstahl))]
