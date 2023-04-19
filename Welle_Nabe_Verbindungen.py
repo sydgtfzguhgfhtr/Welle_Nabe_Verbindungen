@@ -1,3 +1,5 @@
+import math
+
 # DIN 6885
 class Passfeder():
     def __init__(self, dw_von: int, dw_bis: int, b: int, h: int, t1: float, t2: float):
@@ -182,3 +184,36 @@ def Re_nach_Größe(Werkstoff, d, i):
     
     return Re
 
+def Grösseneinflussfaktor_Kt(Werkstoff, d):
+    if Werkstoff in Namen_Baustahl:
+        Kt = 1-0.23*math.log10(d/32)
+        if Kt < 0.89: Kt = 0.89
+        if Kt >= 1: Kt = 1
+    elif Werkstoff in Namen_Verguetungsstahl:
+        Kt = 1-0.26*math.log10(d/16)
+        if Kt < 0.67: Kt = 0.67
+        if Kt >= 1: Kt = 1
+    elif Werkstoff in Namen_Einsatzstahl:
+        Kt = 1-0.41*math.log10(d/11)
+        if Kt < 0.41: Kt = 0.41
+        if Kt >= 1: Kt = 1
+    elif Werkstoff in Namen_Guss_Lamelle:
+        Kt = -0.3760574852272785 * math.log10( d ) + 1.5082467648888314
+        if Kt < 0.56: Kt = 0.56
+        if Kt >= 1.2: Kt = 1.2
+    elif Werkstoff in Namen_Temperguss:
+        Kt = -0.11985755012367008 * math.log10(d) + 1.1412951447553383
+        if Kt < 0.825: Kt = 0.825
+        if Kt >= 1: Kt = 1
+    elif Werkstoff in Namen_Guss_Kugel:
+        Kt = -0.13359602848294613*math.log10(d)+1.2386319918784392
+        if Kt < 0.89: Kt = 0.89
+        if Kt > 1: Kt = 1
+    elif Werkstoff in Namen_Stahlguss:
+        Kt = -0.12471967507884896*math.log10(d)+1.2493459085173144
+        if Kt < 0.925: Kt = 0.925
+        if Kt > 1: Kt = 1
+    else:
+        raise ValueError
+    
+    return Kt
