@@ -214,6 +214,51 @@ def Grösseneinflussfaktor_Kt(Werkstoff, d):
         if Kt < 0.925: Kt = 0.925
         if Kt > 1: Kt = 1
     else:
-        raise ValueError
-    
+        raise ValueError    
     return Kt
+
+def Nummer(Werkstoff):
+    if Werkstoff in Namen_Baustahl:
+        for i in range(len(Namen_Baustahl)):
+            if Werkstoff == Namen_Baustahl[i]:
+                break
+    elif Werkstoff in Namen_Verguetungsstahl:
+        for i in range(len(Namen_Verguetungsstahl)):
+            if Werkstoff == Namen_Verguetungsstahl[i]:
+                break
+    elif Werkstoff in Namen_Einsatzstahl:
+        for i in range(len(Namen_Einsatzstahl)):
+            if Werkstoff == Namen_Einsatzstahl[i]:
+                break
+    elif Werkstoff in Namen_Guss_Lamelle:
+        for i in range(len(Namen_Guss_Lamelle)):
+            if Werkstoff == Namen_Guss_Lamelle[i]:
+                break
+    elif Werkstoff in Namen_Temperguss:
+        for i in range(len(Namen_Temperguss)):
+            if Werkstoff == Namen_Temperguss[i]:
+                break
+    elif Werkstoff in Namen_Guss_Kugel:
+        for i in range(len(Namen_Guss_Kugel)):
+            if Werkstoff == Namen_Guss_Kugel[i]:
+                break
+    elif Werkstoff in Namen_Stahlguss:
+        for i in range(len(Namen_Stahlguss)):
+            if Werkstoff == Namen_Stahlguss[i]:
+                break
+    return i
+
+def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nabe: str, Werkstoff_Passfeder: str, Anzahl_Passfedern: int):
+    """Berechnung Passfeder
+
+    Args:
+        dw (int): Durchmesser der Welle in mm
+        MT (float): wirkendes Drehmoment in Nm
+        Sf (float): Sicherheitsfaktor
+        Werkstoff_Welle (str): Werkstoff der Welle
+        Werkstoff_Nabe (str): Werkstoff der Nabe
+        Werkstoff_Passfeder (str): Werkstoff der Passfedern
+        Anzahl_Passfedern (int): Anzahl der Passfedern (1-3)
+    """
+    pass
+    
