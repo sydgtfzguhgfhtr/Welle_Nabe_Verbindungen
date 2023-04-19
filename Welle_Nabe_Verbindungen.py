@@ -218,35 +218,37 @@ def Grösseneinflussfaktor_Kt(Werkstoff, d):
     return Kt
 
 def Nummer(Werkstoff):
+    i = 0
     if Werkstoff in Namen_Baustahl:
         for i in range(len(Namen_Baustahl)):
             if Werkstoff == Namen_Baustahl[i]:
-                break
+                return i
     elif Werkstoff in Namen_Verguetungsstahl:
         for i in range(len(Namen_Verguetungsstahl)):
             if Werkstoff == Namen_Verguetungsstahl[i]:
-                break
+                return i
     elif Werkstoff in Namen_Einsatzstahl:
         for i in range(len(Namen_Einsatzstahl)):
             if Werkstoff == Namen_Einsatzstahl[i]:
-                break
+                return i
     elif Werkstoff in Namen_Guss_Lamelle:
         for i in range(len(Namen_Guss_Lamelle)):
             if Werkstoff == Namen_Guss_Lamelle[i]:
-                break
+                return i
     elif Werkstoff in Namen_Temperguss:
         for i in range(len(Namen_Temperguss)):
             if Werkstoff == Namen_Temperguss[i]:
-                break
+                return i
     elif Werkstoff in Namen_Guss_Kugel:
         for i in range(len(Namen_Guss_Kugel)):
             if Werkstoff == Namen_Guss_Kugel[i]:
-                break
+                return i
     elif Werkstoff in Namen_Stahlguss:
         for i in range(len(Namen_Stahlguss)):
             if Werkstoff == Namen_Stahlguss[i]:
-                break
-    return i
+                return i
+    else:
+        raise ValueError
 
 def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nabe: str, Werkstoff_Passfeder: str, Anzahl_Passfedern: int):
     """Berechnung Passfeder
@@ -259,6 +261,59 @@ def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
         Werkstoff_Nabe (str): Werkstoff der Nabe
         Werkstoff_Passfeder (str): Werkstoff der Passfedern
         Anzahl_Passfedern (int): Anzahl der Passfedern (1-3)
+    return Liste:
+        [Breite, Höhe, t1, t2, Länge] in mm
     """
-    pass
-    
+    MT = MT*1000
+    for Passfeder_Nummer in range(len(Passfeder_Liste)):
+        if Passfeder_Liste[Passfeder_Nummer].dw_von <= dw and Passfeder_Liste[Passfeder_Nummer].dw_bis > dw:
+            break
+
+    Re_Welle = Re_nach_Größe(Werkstoff_Welle, dw, Nummer(Werkstoff_Welle))
+    Re_Nabe = Re_nach_Größe(Werkstoff_Nabe, dw*2.2, Nummer(Werkstoff_Nabe))
+    Re_Passfeder = Re_nach_Größe(Werkstoff_Passfeder, Passfeder_Liste[Passfeder_Nummer].b, Nummer(Werkstoff_Passfeder))
+
+    Kt_Welle = Grösseneinflussfaktor_Kt(Werkstoff_Welle,dw)
+    Kt_Nabe = Grösseneinflussfaktor_Kt(Werkstoff_Nabe,dw*2.2)
+    Kt_Passfeder = Grösseneinflussfaktor_Kt(Werkstoff_Passfeder,Passfeder_Liste[Passfeder_Nummer].b)
+
+    p_Welle = (Re_Welle*Kt_Welle)/Sf
+    p_Nabe = (Re_Nabe*Kt_Nabe)/Sf
+    p_Passfeder = (Re_Passfeder*Kt_Passfeder)/Sf
+
+    pzul = min(p_Welle, p_Nabe, p_Passfeder)
+
+    l1 = (2*MT)/(dw*pzul*(Passfeder_Liste[Passfeder_Nummer].h-Passfeder_Liste[Passfeder_Nummer].t1))+Passfeder_Liste[Passfeder_Nummer].b
+    l2 = (2*MT)/(dw*pzul*(Passfeder_Liste[Passfeder_Nummer].h-Passfeder_Liste[Passfeder_Nummer].t1)*2*0.75)+Passfeder_Liste[Passfeder_Nummer].b
+    l3 = (2*MT)/(dw*pzul*(Passfeder_Liste[Passfeder_Nummer].h-Passfeder_Liste[Passfeder_Nummer].t1)*3*0.75)+Passfeder_Liste[Passfeder_Nummer].b
+
+    mögl_Längen = [8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32, 36, 40, 45, 50, 56, 63, 70, 80, 90, 100, 110, 125, 140, 160, 180, 200, 220, 250, 280, 320, 360, 400]
+
+    for i in range(len(mögl_Längen)):
+        if l1 <= mögl_Längen[i]:
+            l1 = mögl_Längen[i]
+            break
+
+    for i in range(len(mögl_Längen)):
+        if l2 <= mögl_Längen[i]:
+            l2 = mögl_Längen[i]
+            break
+
+    for i in range(len(mögl_Längen)):
+        if l3 <= mögl_Längen[i]:
+            l3 = mögl_Längen[i]
+            break
+        
+    if Anzahl_Passfedern == 1:
+        l = l1
+    elif Anzahl_Passfedern == 2:
+        l = l2
+    elif Anzahl_Passfedern == 3:
+        l = l3
+    else:
+        raise ValueError
+        
+    return[Passfeder_Liste[Passfeder_Nummer].b, Passfeder_Liste[Passfeder_Nummer].h, Passfeder_Liste[Passfeder_Nummer].t1, Passfeder_Liste[Passfeder_Nummer].t2, l]
+
+
+print(Passfeder(50, 1872, 1.4, "42CrMo4", "S355", "C45", 2))
