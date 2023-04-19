@@ -152,3 +152,33 @@ Temperguss = [Temperguss_C(Namen_Temperguss[i], Rm_Temp[i]) for i in range(len(N
 Gusseisen_Kugelgrafit = [Gusseiden_Kugelgrafit_C(Namen_Guss_Kugel[i], Rm_Kugel[i]) for i in range(len(Namen_Guss_Kugel))]
 Stahlguss = [Stahlguss_C(Namen_Stahlguss[i], Rm_Stahlguss[i]) for i in range(len(Namen_Stahlguss))]
 
+def Re_nach_Größe(Werkstoff, d, i):
+    if Werkstoff in Namen_Baustahl:
+        if d <= 16:
+            Re = Baustaehle[i].Re_u_16
+        elif d <= 40:
+            Re = Baustaehle[i].Re_u_40
+        elif d <= 63:
+            Re = Baustaehle[i].Re_u_63
+        else:
+            Re = Baustaehle[i].Re_u_80
+    elif Werkstoff in Namen_Verguetungsstahl:
+        if d <= 40:
+            Re = (Verguetungsstaehle[i].Re_u_40_von + Verguetungsstaehle[i].Re_u_40_bis)/2
+        else:
+            Re = (Verguetungsstaehle[i].Re_ue_40_von + Verguetungsstaehle[i].Re_ue_40_bis)/2
+    elif Werkstoff in Namen_Einsatzstahl:
+        Re = (Einsatzstaehle[i].Rm_von + Einsatzstaehle[i].Rm_bis)/2
+    elif Werkstoff in Namen_Guss_Lamelle:
+        Re = Gusseisen_Lamellengrafit[i].Rm
+    elif Werkstoff in Namen_Temperguss:
+        Re = Temperguss[i].Rm
+    elif Werkstoff in Namen_Guss_Kugel:
+        Re = Gusseisen_Kugelgrafit[i].Rm
+    elif Werkstoff in Namen_Stahlguss:
+        Re = Stahlguss[i].Rm
+    else:
+        raise ValueError
+    
+    return Re
+
