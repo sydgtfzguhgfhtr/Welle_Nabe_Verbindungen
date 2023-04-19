@@ -96,6 +96,25 @@ class Einsatzstahl():
         self.Rm_von = Rm_von
         self.Rm_bis = Rm_bis
 
+class Gusseisen_Lammellengrafit_C():
+    def __init__(self, Bezeichnung: str, Rm: int):
+        self.Bezeichnung = Bezeichnung
+        self.Rm = Rm
+
+class Temperguss_C():
+    def __init__(self, Bezeichnung: str, Rm: int):
+        self.Bezeichnung = Bezeichnung
+        self.Rm = Rm
+
+class Gusseiden_Kugelgrafit_C():
+    def __init__(self, Bezeichnung: str, Rm: int):
+        self.Bezeichnung = Bezeichnung
+        self.Rm = Rm
+
+class Stahlguss_C():
+    def __init__(self, Bezeichnung: str, Rm: int):
+        self.Bezeichnung = Bezeichnung
+        self.Rm = Rm
 
 Namen_Baustahl = ["S185", "S235", "S275", "S355", "S450"]
 U_16_Baustahl = [185, 235, 275, 355, 450]
@@ -113,7 +132,23 @@ Namen_Einsatzstahl = ["C10E", "C10R", "C15E", "C15R", "17Cr3", "17CrS3", "16MnCr
 Rm_von_E = [490, 490, 590, 590, 700, 700, 780, 780, 900, 980, 980, 930, 930, 780, 780, 780, 780, 1100, 1000, 920, 900, 800, 800, 1000, 1000, 1100, 980, 980, 1100, 1030, 1400, 1100]
 Rm_bis_E = [640, 640, 780, 780, 900, 900, 1080, 1080, 900, 1270, 1270, 1300, 1300, 1080, 1080, 1080, 1080, 1100, 1000, 1230, 900, 800, 800, 1000, 1000, 1100, 1270, 1270, 1100, 1080, 1400, 1100]
 
+Namen_Guss_Lamelle = ["EN-GJL-100","EN-GJL-150","EN-GJL-200","EN-GJL-250","EN-GJL-300","EN-GJL-350"]
+Rm_Guss_L = [100, 130, 180, 225, 270, 315]
+
+Namen_Temperguss = ["EN-GJMW-350-4","EN-GJMW-400-5","EN-GJMW-450-7","EN-GJMW-550-4","EN-GJMW-360-12","EN-GJMB-300-6","EN-GJMB-350-10","EN-GJMB-450-6","EN-GJMB-500-5","EN-GJMB-550-4","EN-GJMB-600-3","EN-GJMB-650-2","EN-GJMB-700-2","EN-GJMB-800-1"]
+Rm_Temp = [350,400,450,550,360,300,350,450,500,550,600,650,700,800]
+
+Namen_Guss_Kugel = ["EN-GJS-350-22-LT","EN-GJS-350-22-RT","EN-GJS-350-22","EN-GJS-400-18-LT","EN-GJS-400-18-RT","EN-GJS-400-18","EN-GJS-400-15","EN-GJS-450-10","EN-GJS-500-7","EN-GJS-600-3","EN-GJS-700-2","EN-GJS-800-2","EN-GJS-900-2","EN-GJS-450-18","EN-GJS-500-14","EN-GJS-600-10"]
+Rm_Kugel = [350,350,350,400,400,400,400,450,500,600,700,800,900,450,500,600]
+
+Namen_Stahlguss = ["GE200","GE240","GE300","G17Mn5","G20Mn5","GX4CrNiMo16-5-1","G28Mn6","G10MnMoV6-3","G34CrMo4","G32NiCrMo8-5-4","GX23CrMoV12-1"]
+Rm_Stahlguss = [455,525,675,525,550,860,600,675,775,925,810]
 
 Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
 Verguetungsstaehle = [Verguetungsstahl(Namen_Verguetungsstahl[i], U_40_von_V[i], U_40_bis_V[i], Ue_40_von_V[i], Ue_40_bis_V[i]) for i in range(len(Namen_Verguetungsstahl))]
 Einsatzstaehle = [Einsatzstahl(Namen_Einsatzstahl[i], Rm_von_E[i], Rm_bis_E[i]) for i in range(len(Namen_Einsatzstahl))]
+Gusseisen_Lamellengrafit = [Gusseisen_Lammellengrafit_C(Namen_Guss_Lamelle[i], Rm_Guss_L[i]) for i in range(len(Namen_Guss_Lamelle))]
+Temperguss = [Temperguss_C(Namen_Temperguss[i], Rm_Temp[i]) for i in range(len(Namen_Temperguss))]
+Gusseisen_Kugelgrafit = [Gusseiden_Kugelgrafit_C(Namen_Guss_Kugel[i], Rm_Kugel[i]) for i in range(len(Namen_Guss_Kugel))]
+Stahlguss = [Stahlguss_C(Namen_Stahlguss[i], Rm_Stahlguss[i]) for i in range(len(Namen_Stahlguss))]
+
