@@ -250,6 +250,12 @@ def Nummer(Werkstoff):
     else:
         raise ValueError
 
+def P_ZUL(Werkstoff: str, d: float, Sf: float):
+    Re = Re_nach_Größe(Werkstoff, d, Nummer(Werkstoff))
+    Kt = Grösseneinflussfaktor_Kt(Werkstoff, d)
+    p = (Re*Kt)/Sf
+    return p
+
 def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nabe: str, Werkstoff_Passfeder: str, Anzahl_Passfedern: int):
     """Berechnung Passfeder
 
@@ -269,17 +275,9 @@ def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
         if Passfeder_Liste[Passfeder_Nummer].dw_von <= dw and Passfeder_Liste[Passfeder_Nummer].dw_bis > dw:
             break
 
-    Re_Welle = Re_nach_Größe(Werkstoff_Welle, dw, Nummer(Werkstoff_Welle))
-    Re_Nabe = Re_nach_Größe(Werkstoff_Nabe, dw*2.2, Nummer(Werkstoff_Nabe))
-    Re_Passfeder = Re_nach_Größe(Werkstoff_Passfeder, Passfeder_Liste[Passfeder_Nummer].b, Nummer(Werkstoff_Passfeder))
-
-    Kt_Welle = Grösseneinflussfaktor_Kt(Werkstoff_Welle,dw)
-    Kt_Nabe = Grösseneinflussfaktor_Kt(Werkstoff_Nabe,dw*2.2)
-    Kt_Passfeder = Grösseneinflussfaktor_Kt(Werkstoff_Passfeder,Passfeder_Liste[Passfeder_Nummer].b)
-
-    p_Welle = (Re_Welle*Kt_Welle)/Sf
-    p_Nabe = (Re_Nabe*Kt_Nabe)/Sf
-    p_Passfeder = (Re_Passfeder*Kt_Passfeder)/Sf
+    p_Welle = P_ZUL(Werkstoff_Welle, dw, Sf)
+    p_Nabe = P_ZUL(Werkstoff_Nabe, dw*2.2, Sf)
+    p_Passfeder = P_ZUL(Werkstoff_Passfeder, Passfeder_Liste[Passfeder_Nummer].b, Sf)
 
     pzul = min(p_Welle, p_Nabe, p_Passfeder)
 
@@ -315,5 +313,53 @@ def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
         
     return[Passfeder_Liste[Passfeder_Nummer].b, Passfeder_Liste[Passfeder_Nummer].h, Passfeder_Liste[Passfeder_Nummer].t1, Passfeder_Liste[Passfeder_Nummer].t2, l]
 
+def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nabe: str, Art: str):
+    """Berechnung Keilwelle
 
-print(Passfeder(50, 1872, 1.4, "42CrMo4", "S355", "C45", 2))
+    Args:
+        dw (int): Durchmesser der Welle in mm
+        MT (float): Drehmoment in Nm
+        Sf (float): Sicherheitsfaktor
+        Werkstoff_Welle (str): Werkstoff der Welle
+        Werkstoff_Nabe (str): Werkstoff der Nabe
+
+    Returns:
+        Liste[
+        n...Anzahl der Keile,
+        d...kleiner Durchmesser,
+        D...großer Durchmesser,
+        b...Breite der Keile,
+        l...erforderliche Länge der Keilwell
+        ]
+    """
+    if Art == "leicht":
+        Keilwelle = Keilwelle_leicht_Liste
+    elif Art == "mittel":
+        Keilwelle = Keilwelle_mittel_Liste
+    elif Art == "schwer":
+        Keilwelle = Keilwelle_schwer_Liste
+
+    MT = 1000*MT
+
+    for k in range(len(Keilwelle)):
+        if Keilwelle[k].d >= dw:
+            nr = k
+            break
+
+    p_Welle = P_ZUL(Werkstoff_Welle, dw, Sf)
+    p_Nabe = P_ZUL(Werkstoff_Nabe, 2*dw, Sf)
+
+    p_zul = min(p_Welle, p_Nabe)
+
+    i = 1
+
+    while True:
+        p = (2*MT)/(Keilwelle[k].dm*Keilwelle[k].h*i*Keilwelle[k].n*Keilwelle[k].phi)
+        if p >= 0 and p <= p_zul:
+            break
+        i += 1
+
+    Maße = [Keilwelle[k].n, Keilwelle[k].d, Keilwelle[k].D, Keilwelle[k].b, i]
+    return Maße
+
+print(Keilwelle_leichte_Reihe(50, 1872, 1.4, "S185", "S185", "leicht"))
