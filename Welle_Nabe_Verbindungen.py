@@ -180,7 +180,7 @@ def Re_nach_Größe(Werkstoff, d, i):
     elif Werkstoff in Namen_Stahlguss:
         Re = Stahlguss[i].Rm
     else:
-        raise ValueError
+        raise ValueError("Werkstoff nicht bekannt")
     
     return Re
 
@@ -214,7 +214,7 @@ def Grösseneinflussfaktor_Kt(Werkstoff, d):
         if Kt < 0.925: Kt = 0.925
         if Kt > 1: Kt = 1
     else:
-        raise ValueError    
+        raise ValueError("Werkstoff nicht bekannt")    
     return Kt
 
 def Nummer(Werkstoff):
@@ -248,7 +248,7 @@ def Nummer(Werkstoff):
             if Werkstoff == Namen_Stahlguss[i]:
                 return i
     else:
-        raise ValueError
+        raise ValueError("Werkstoff nicht bekannt")
 
 def P_ZUL(Werkstoff: str, d: float, Sf: float):
     Re = Re_nach_Größe(Werkstoff, d, Nummer(Werkstoff))
@@ -309,7 +309,7 @@ def Passfeder(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
     elif Anzahl_Passfedern == 3:
         l = l3
     else:
-        raise ValueError
+        raise ValueError("nur 1, 2 oder 3 Passfedern möglich")
         
     return[Passfeder_Liste[Passfeder_Nummer].b, Passfeder_Liste[Passfeder_Nummer].h, Passfeder_Liste[Passfeder_Nummer].t1, Passfeder_Liste[Passfeder_Nummer].t2, l]
 
@@ -322,7 +322,7 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
         Sf (float): Sicherheitsfaktor
         Werkstoff_Welle (str): Werkstoff der Welle
         Werkstoff_Nabe (str): Werkstoff der Nabe
-
+        Art (str): leicht, mittel, schwer
     Returns:
         Liste[
         n...Anzahl der Keile,
@@ -338,6 +338,8 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
         Keilwelle = Keilwelle_mittel_Liste
     elif Art == "schwer":
         Keilwelle = Keilwelle_schwer_Liste
+    else:
+        raise ValueError("nur leicht, mittel oder schwer möglich")
 
     MT = 1000*MT
 
@@ -362,4 +364,3 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
     Maße = [Keilwelle[k].n, Keilwelle[k].d, Keilwelle[k].D, Keilwelle[k].b, i]
     return Maße
 
-print(Keilwelle_leichte_Reihe(50, 1872, 1.4, "S185", "S185", "leicht"))
