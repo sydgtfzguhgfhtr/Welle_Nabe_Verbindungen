@@ -44,7 +44,7 @@ class Keilwelle_schwer():
         self.h = (self.D - self.d) / 2
 
 # Abmaße
-P_dw_von = [10,12,17,22,30,38,44,50,58,65,75,85,95,110,130,150,170]
+P_dw_von = [0,12,17,22,30,38,44,50,58,65,75,85,95,110,130,150,170]
 P_dw_bis = [12,17,22,30,38,44,50,58,65,75,85,95,110,130,150,170,200]
 P_b = [4,5,6,8,10,12,14,16,18,20,22,25,38,32,36,40,45]
 P_h = [4,5,6,7,8,8,9,10,11,12,14,14,16,18,20,22,25]
@@ -364,3 +364,4 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
     Maße = [Keilwelle[k].n, Keilwelle[k].d, Keilwelle[k].D, Keilwelle[k].b, i]
     return Maße
 
+print(Passfeder(9,2,1,"S185","S185","S185",2))
