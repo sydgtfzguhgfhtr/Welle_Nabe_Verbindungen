@@ -1,6 +1,6 @@
 # Welle_Nabe_Verbindungen
 
-## Passfedern berechnen  
+## Passfedern berechnen (nach DIN 6885)    
 ### Funktion:  
 ```
 Passfeder(dw, MT, Sf, Werkstoff_Welle, Werkstoff_Nabe, Werkstoff_Passfeder, Anzahl_Passfedern)
@@ -24,7 +24,7 @@ $$ \downarrow$$
 [b, h, t1, t2, l]
 ```
 
-## Keilwelle berechnen  
+## Keilwelle berechnen (nach ISO 14 (leichte und mittelere Reihe) / DIN 5464 (schwere Reihe))  
 ### Funktion:  
 ```
 Keilwelle(dw, MT, Sf, Werkstoff_Welle, Werkstoff_Nabe, Art)
@@ -47,3 +47,10 @@ $$ \downarrow$$
 ```
 [n, d, D, b, l]
 ```
+## Fehlermeldungen  
+### 1. Werkstoff nicht bekannt  
+nur Werkstoffe aus Werkstoffliste möglich  
+### 2. nur 1, 2 oder 3 Passfedernmöglich  
+Variable "Anzahl_Passfedern" muss zwischen 1, 2 oder 3 sein
+### 3. nur leicht, mittel oder schwer möglich  
+Variable "Art" bei Keillwelle nur leicht, mittel oder schwer (=-e Reihe)
