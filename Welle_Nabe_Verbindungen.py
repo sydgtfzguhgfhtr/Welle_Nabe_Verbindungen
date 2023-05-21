@@ -146,6 +146,7 @@ Rm_Kugel = [350,350,350,400,400,400,400,450,500,600,700,800,900,450,500,600]
 Namen_Stahlguss = ["GE200","GE240","GE300","G17Mn5","G20Mn5","GX4CrNiMo16-5-1","G28Mn6","G10MnMoV6-3","G34CrMo4","G32NiCrMo8-5-4","GX23CrMoV12-1"]
 Rm_Stahlguss = [455,525,675,525,550,860,600,675,775,925,810]
 
+# Liste mit Werkstoffen erstellen
 Baustaehle = [Baustahl(Namen_Baustahl[i], U_16_Baustahl[i], U_40_Baustahl[i], U_63_Baustahl[i], U_80_Baustahl[i]) for i in range(len(Namen_Baustahl))]
 Verguetungsstaehle = [Verguetungsstahl(Namen_Verguetungsstahl[i], U_40_von_V[i], U_40_bis_V[i], Ue_40_von_V[i], Ue_40_bis_V[i]) for i in range(len(Namen_Verguetungsstahl))]
 Einsatzstaehle = [Einsatzstahl(Namen_Einsatzstahl[i], Rm_von_E[i], Rm_bis_E[i]) for i in range(len(Namen_Einsatzstahl))]
@@ -154,6 +155,7 @@ Temperguss = [Temperguss_C(Namen_Temperguss[i], Rm_Temp[i]) for i in range(len(N
 Gusseisen_Kugelgrafit = [Gusseiden_Kugelgrafit_C(Namen_Guss_Kugel[i], Rm_Kugel[i]) for i in range(len(Namen_Guss_Kugel))]
 Stahlguss = [Stahlguss_C(Namen_Stahlguss[i], Rm_Stahlguss[i]) for i in range(len(Namen_Stahlguss))]
 
+# Streckgrenze für Werkstoff und Bauteilabmaße 
 def Re_nach_Größe(Werkstoff, d, i):
     if Werkstoff in Namen_Baustahl:
         if d <= 16:
@@ -217,6 +219,7 @@ def Grösseneinflussfaktor_Kt(Werkstoff, d):
         raise ValueError("Werkstoff nicht bekannt")    
     return Kt
 
+# Nummer des Werkstoffs in Liste
 def Nummer(Werkstoff):
     i = 0
     if Werkstoff in Namen_Baustahl:
@@ -250,6 +253,7 @@ def Nummer(Werkstoff):
     else:
         raise ValueError("Werkstoff nicht bekannt")
 
+# zulässige Flächenpressung 
 def P_ZUL(Werkstoff: str, d: float, Sf: float):
     Re = Re_nach_Größe(Werkstoff, d, Nummer(Werkstoff))
     Kt = Grösseneinflussfaktor_Kt(Werkstoff, d)
@@ -364,4 +368,5 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
     Maße = [Keilwelle[k].n, Keilwelle[k].d, Keilwelle[k].D, Keilwelle[k].b, i]
     return Maße
 
+# Beispiel
 print(Passfeder(9,2,1,"S185","S185","S185",2))
