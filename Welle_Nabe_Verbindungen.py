@@ -1,3 +1,5 @@
+
+
 import math
 
 # DIN 6885
@@ -364,4 +366,3 @@ def Keilwelle(dw: int, MT: float, Sf: float, Werkstoff_Welle: str, Werkstoff_Nab
     Maße = [Keilwelle[k].n, Keilwelle[k].d, Keilwelle[k].D, Keilwelle[k].b, i]
     return Maße
 
-print(Passfeder(9,2,1,"S185","S185","S185",2))
