@@ -77,6 +77,7 @@ Keilwelle_leicht_Liste = [Keilwelle_leicht(Kl_n[i], Kl_d[i], Kl_D[i], Kl_b[i], K
 Keilwelle_mittel_Liste = [Keilwelle_mittel(Km_n[i], Km_d[i], Km_D[i], Km_b[i], Km_phi[i]) for i in range(len(Km_n))]
 Keilwelle_schwer_Liste = [Keilwelle_schwer(Ks_n[i], Ks_d[i], Ks_D[i], Ks_b[i], Ks_phi[i]) for i in range(len(Ks_n))]
 
+
 # Werkstoffe
 class Baustahl():
     def __init__(self, Bezeichnung: str, Re_u_16: int, Re_u_40: int, Re_u_63: int, Re_u_80: int):
